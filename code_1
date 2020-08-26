@@ -1,0 +1,103 @@
+package com.bank.token;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+
+public class BankApplication {
+
+	private static PriorityQueue token = new PriorityQueue();
+	private static List<String> customer = new ArrayList();
+	private static List<Integer> counter = new ArrayList();
+	private static int tokenNumber=001;
+	private static int c1,c2,c3;
+	
+	private static int counterNumber=1;
+	
+	private static Map<String,Integer> customerToken = new HashMap();
+	private static Map<Integer,Integer> tokenCounter = new HashMap();
+	
+	public static void main(String[] args) {
+		
+		customer.add("customer1");
+		customer.add("customer2");
+		customer.add("customer3");
+		customer.add("customer4");
+		customer.add("customer5");
+		
+		counter.add(c1);
+		counter.add(c2);
+		counter.add(c3);
+		
+		for(int i=0;i<customer.size();i++){
+			int token = getToken();
+			assignToken(customer.get(i),token);
+		}
+		
+		System.out.println("--------------Displaying Customer Token------");
+		displayToken(customerToken);
+		
+		System.out.println();
+		System.out.println("--------------Displaying Token  Counter-------");
+		displayCounter(tokenCounter);
+	}
+	
+	public static int getToken(){
+		
+		if(tokenNumber>100){
+			tokenNumber=001;
+		}
+		
+		return tokenNumber++;
+	}
+	
+public static int getCounterNumber(){
+		
+		if(counterNumber>3){
+			counterNumber=1;
+		}
+		
+		return counterNumber++;
+	}
+
+public static void assignToken(String customer,int token){
+	customerToken.put(customer, token);
+	int counter = getCounterNumber();
+}
+
+public static void displayCounter(Map tokenCounter){
+	
+	Set set =tokenCounter.keySet();
+	Iterator it=set.iterator();
+	System.out.println("Token Name        Counter Number");
+	System.out.println("----------------------------------");
+	while(it.hasNext()){
+		int token=(int)it.next();
+		System.out.println(token+"              =====>   "+tokenCounter.get(token));
+		
+	}
+}
+
+
+public static void displayToken(Map customer){
+	
+	Set set =customer.keySet();
+	Iterator it=set.iterator();
+	System.out.println("Cutstomer Name        Token Number");
+	System.out.println("----------------------------------");
+	while(it.hasNext()){
+		String cust=(String)it.next();
+		System.out.println(cust+"      =====>   "+customer.get(cust));
+		
+		int counter = getCounterNumber();
+		tokenCounter.put((int)customer.get(cust), counter);
+		
+	}
+}
+
+
+}
